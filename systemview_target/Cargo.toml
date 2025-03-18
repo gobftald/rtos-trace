@@ -21,8 +21,8 @@ cortex-m = ["dep:cortex-m"]
 
 [dependencies]
 cty = "0.2"
-rtos-trace = "0.1"
-heapless = { version = "0.7", optional = true }
+rtos-trace = { version = "0.1", path = "../rtos_trace" }
+heapless = { version = "0.8", optional = true }
 log = { version = "0.4", optional = true, features = [
     "max_level_debug",
     "release_max_level_warn",
@@ -31,14 +31,14 @@ cortex-m = { version = "0.7", optional = true }
 
 [build-dependencies]
 # default features must be disabled, because bindgen enables `std` in `log`
-bindgen = { version = "0.60", default-features = false, features = ["runtime"] }
+bindgen = { version = "0.72", default-features = false, features = ["runtime"] }
 cc = "1.0"
 
 [dev-dependencies]
 #st-nucleo-f446 = { path = "../../platform/st_nucleo_f446" }
 cortex-m = "0.7"
 cortex-m-rt = "0.7"
-panic-halt = "0.2"
+panic-halt = "1.0.0"
 
 [[example]]
 name = "no_os"

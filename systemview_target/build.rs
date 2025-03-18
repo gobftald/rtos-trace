@@ -10,7 +10,7 @@ fn main() {
         .use_core()
         .header("src/wrapper.h")
         .clang_arg("-Ilib/Config")
-        .parse_callbacks(Box::new(bindgen::CargoCallbacks))
+        .parse_callbacks(Box::new(bindgen::CargoCallbacks::new()))
         .generate()
         .expect("Unable to generate bindings");
 
