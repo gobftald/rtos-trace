@@ -13,6 +13,7 @@ homepage = "https://bern-rtos.org"
 
 
 [features]
+default = ["cortex-m"]
 callbacks-os = []
 callbacks-os-time = []
 callbacks-app = []
