@@ -1,9 +1,8 @@
-use core::fmt;
-use log::{Level, Log, Metadata, Record};
-use crate::SystemView;
 use crate::wrapper::*;
+use crate::SystemView;
+use core::fmt;
 use fmt::Write;
-
+use log::{Level, Log, Metadata, Record};
 
 pub fn print(str: &str) {
     unsafe {
@@ -68,7 +67,6 @@ macro_rules! error {
     };
 }
 
-
 impl Log for SystemView {
     fn enabled(&self, _metadata: &Metadata) -> bool {
         true
@@ -77,7 +75,13 @@ impl Log for SystemView {
     fn log(&self, record: &Record) {
         cortex_m::interrupt::free(|_| {
             let mut s: heapless::String<128> = heapless::String::new();
-            write!(&mut s, "{} {}\n\r\0", record.level().as_str(), record.args()).ok();
+            write!(
+                &mut s,
+                "{} {}\n\r\0",
+                record.level().as_str(),
+                record.args()
+            )
+            .ok();
 
             match record.metadata().level() {
                 Level::Error => error(s.as_str()),

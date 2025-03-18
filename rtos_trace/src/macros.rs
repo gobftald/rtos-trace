@@ -1,4 +1,3 @@
-
 #[macro_export]
 macro_rules! global_trace {
     ($ident:ident) => {
@@ -61,9 +60,8 @@ macro_rules! global_trace {
         fn _rtos_trace_marker_end(id: u32) {
             <$ident as $crate::RtosTrace>::marker_end(id)
         }
-    }
+    };
 }
-
 
 #[macro_export]
 macro_rules! global_os_callbacks {
@@ -76,9 +74,8 @@ macro_rules! global_os_callbacks {
         fn _rtos_trace_time() -> u64 {
             <$ident as $crate::RtosTraceOSCallbacks>::time()
         }
-    }
+    };
 }
-
 
 #[macro_export]
 macro_rules! global_application_callbacks {
@@ -91,5 +88,5 @@ macro_rules! global_application_callbacks {
         fn _rtos_trace_sysclock() -> u32 {
             <$ident as $crate::RtosTraceApplicationCallbacks>::sysclock()
         }
-    }
+    };
 }

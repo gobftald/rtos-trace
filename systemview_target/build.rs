@@ -5,7 +5,7 @@ fn main() {
     // Create SystemView bindings
     println!("cargo:rerun-if-changed=src/wrapper.h");
     let bindings = bindgen::Builder::default()
-        // prefix `cty` insteand of `std` for `no_std`
+        // prefix `cty` instead of `std` for `no_std`
         .ctypes_prefix("cty")
         .use_core()
         .header("src/wrapper.h")

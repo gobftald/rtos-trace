@@ -23,8 +23,11 @@ cortex-m = ["dep:cortex-m"]
 cty = "0.2"
 rtos-trace = "0.1"
 heapless = { version = "0.7", optional = true }
-log = { version = "0.4", optional = true, features = ["max_level_debug", "release_max_level_warn"] }
-cortex-m = {version = "0.7", optional = true }
+log = { version = "0.4", optional = true, features = [
+    "max_level_debug",
+    "release_max_level_warn",
+] }
+cortex-m = { version = "0.7", optional = true }
 
 [build-dependencies]
 # default features must be disabled, because bindgen enables `std` in `log`
@@ -42,7 +45,5 @@ name = "no_os"
 required-features = ["callbacks-app"]
 
 [package.metadata.docs.rs]
-targets = [
-    "thumbv7em-none-eabihf",
-]
+targets = ["thumbv7em-none-eabihf"]
 features = ["cortex-m"]
