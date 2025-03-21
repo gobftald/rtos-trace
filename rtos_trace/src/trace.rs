@@ -4,6 +4,9 @@ use crate::TaskInfo;
 
 #[cfg(feature = "trace_impl")]
 extern "Rust" {
+    fn _rtos_trace_start();
+    fn _rtos_trace_stop();
+
     fn _rtos_trace_task_new(id: u32);
     fn _rtos_trace_task_terminate(id: u32);
     fn _rtos_trace_task_exec_begin(id: u32);
@@ -28,6 +31,20 @@ extern "Rust" {
     fn _rtos_trace_sysclock() -> u32;
 }
 
+#[inline]
+pub fn start() {
+    #[cfg(feature = "trace_impl")]
+    unsafe {
+        _rtos_trace_start()
+    }
+}
+#[inline]
+pub fn stop() {
+    #[cfg(feature = "trace_impl")]
+    unsafe {
+        _rtos_trace_stop()
+    }
+}
 #[inline]
 pub fn task_new(id: u32) {
     #[cfg(feature = "trace_impl")]

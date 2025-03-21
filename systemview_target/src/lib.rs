@@ -80,6 +80,18 @@ impl SystemView {
 }
 
 impl RtosTrace for SystemView {
+    fn start() {
+        unsafe {
+            SEGGER_SYSVIEW_Start();
+        }
+    }
+
+    fn stop() {
+        unsafe {
+            SEGGER_SYSVIEW_Stop();
+        }
+    }
+
     fn task_new(id: u32) {
         unsafe {
             SEGGER_SYSVIEW_OnTaskCreate(id);

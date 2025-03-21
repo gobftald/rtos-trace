@@ -16,7 +16,7 @@ extern unsigned int _rtos_trace_sysclock(void);
 
 // Define as 1 if the Cortex-M cycle counter is used and there might be no debugger attached while recording.
 #ifndef   ENABLE_DWT_CYCCNT
-  #define ENABLE_DWT_CYCCNT       (USE_CYCCNT_TIMESTAMP & SEGGER_SYSVIEW_POST_MORTEM_MODE)
+  #define ENABLE_DWT_CYCCNT       1
 #endif
 
 

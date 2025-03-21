@@ -2,6 +2,14 @@
 macro_rules! global_trace {
     ($ident:ident) => {
         #[no_mangle]
+        fn _rtos_trace_start() {
+            <$ident as $crate::RtosTrace>::start()
+        }
+        #[no_mangle]
+        fn _rtos_trace_stop() {
+            <$ident as $crate::RtosTrace>::stop()
+        }
+        #[no_mangle]
         fn _rtos_trace_task_new(id: u32) {
             <$ident as $crate::RtosTrace>::task_new(id)
         }

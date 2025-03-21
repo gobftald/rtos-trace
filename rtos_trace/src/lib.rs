@@ -88,6 +88,11 @@ pub struct TaskInfo {
 
 /// Collection of tracing functions which are called by the RTOS.
 pub trait RtosTrace {
+    /// Start tracing.
+    fn start();
+    /// Stop tracing.
+    fn stop();
+
     /// A new task with `id` was created.
     fn task_new(id: u32);
     /// The task with `id` has `info` attributes.
