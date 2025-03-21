@@ -33,10 +33,12 @@ static void send_system_description(void) {
 }
 
 
+#ifdef CALLBACKS_OS
 static SEGGER_SYSVIEW_OS_API os_callbacks = {
         .pfGetTime = _rtos_trace_time,
         .pfSendTaskList = _rtos_trace_task_list,
 };
+#endif
 
 void SEGGER_SYSVIEW_Conf(void) {
 #if USE_CYCCNT_TIMESTAMP
@@ -61,7 +63,11 @@ void SEGGER_SYSVIEW_Conf(void) {
   SEGGER_SYSVIEW_Init(
           _rtos_trace_sysclock(),
           _rtos_trace_sysclock(),
+#ifdef CALLBACKS_OS
           &os_callbacks,
+#else
+          0,
+#endif
           send_system_description);
   SEGGER_SYSVIEW_SetRAMBase(SYSVIEW_RAM_BASE);
 }
