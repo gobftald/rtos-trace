@@ -8,6 +8,7 @@ extern "Rust" {
     fn _rtos_trace_stop();
 
     fn _rtos_trace_task_new(id: u32);
+    fn _rtos_trace_task_new_stackless(id: u32, name: &'static str, priority: u32);
     fn _rtos_trace_task_terminate(id: u32);
     fn _rtos_trace_task_exec_begin(id: u32);
     fn _rtos_trace_task_exec_end();
@@ -50,6 +51,13 @@ pub fn task_new(id: u32) {
     #[cfg(feature = "trace_impl")]
     unsafe {
         _rtos_trace_task_new(id)
+    }
+}
+#[inline]
+pub fn task_new_stackless(id: u32, name: &'static str, priority: u32) {
+    #[cfg(feature = "trace_impl")]
+    unsafe {
+        _rtos_trace_task_new_stackless(id, name, priority)
     }
 }
 #[inline]

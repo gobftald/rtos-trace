@@ -97,6 +97,8 @@ pub trait RtosTrace {
     fn task_new(id: u32);
     /// The task with `id` has `info` attributes.
     fn task_send_info(id: u32, info: TaskInfo);
+    /// Convenience function to create a new task with a name only.
+    fn task_new_stackless(id: u32, name: &'static str, priority: u32);
     /// The task with `id` has been terminated.
     fn task_terminate(id: u32);
     /// The task with `id` will start to run on the CPU now.

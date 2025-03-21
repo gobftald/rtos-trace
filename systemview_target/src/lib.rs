@@ -117,6 +117,19 @@ impl RtosTrace for SystemView {
         }
     }
 
+    fn task_new_stackless(id: u32, name: &'static str, priority: u32) {
+        Self::task_new(id);
+        Self::task_send_info(
+            id,
+            TaskInfo {
+                name,
+                priority,
+                stack_base: 0,
+                stack_size: 0,
+            },
+        );
+    }
+
     fn task_terminate(id: u32) {
         unsafe {
             SEGGER_SYSVIEW_OnTaskTerminate(id);

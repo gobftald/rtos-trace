@@ -14,6 +14,10 @@ macro_rules! global_trace {
             <$ident as $crate::RtosTrace>::task_new(id)
         }
         #[no_mangle]
+        fn _rtos_trace_task_new_stackless(id: u32, name: &'static str, priority: u32) {
+            <$ident as $crate::RtosTrace>::task_new_stackless(id, name, priority)
+        }
+        #[no_mangle]
         fn _rtos_trace_task_send_info(id: u32, info: $crate::TaskInfo) {
             <$ident as $crate::RtosTrace>::task_send_info(id, info)
         }
