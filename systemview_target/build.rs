@@ -4,6 +4,7 @@ use std::path::PathBuf;
 fn main() {
     // Create SystemView bindings
     println!("cargo:rerun-if-changed=src/wrapper.h");
+    println!("cargo:rerun-if-changed=lib/impl/systemview_conf_cortex_m.c");
     let bindings = bindgen::Builder::default()
         // prefix `cty` instead of `std` for `no_std`
         .ctypes_prefix("cty")
