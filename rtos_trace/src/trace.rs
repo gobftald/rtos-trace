@@ -21,6 +21,7 @@ extern "Rust" {
     fn _rtos_trace_isr_exit();
     fn _rtos_trace_isr_exit_to_scheduler();
 
+    fn _rtos_trace_name_marker(id: u32, name: &'static str);
     fn _rtos_trace_marker(id: u32);
     fn _rtos_trace_marker_begin(id: u32);
     fn _rtos_trace_marker_end(id: u32);
@@ -126,6 +127,13 @@ pub fn isr_exit_to_scheduler() {
     }
 }
 
+#[inline]
+pub fn name_marker(id: u32, name: &'static str) {
+    #[cfg(feature = "trace_impl")]
+    unsafe {
+        _rtos_trace_name_marker(id, name)
+    }
+}
 #[inline]
 pub fn marker(id: u32) {
     #[cfg(feature = "trace_impl")]

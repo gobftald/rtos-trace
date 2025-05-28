@@ -61,6 +61,10 @@ macro_rules! global_trace {
         }
 
         #[no_mangle]
+        fn _rtos_trace_name_marker(id: u32, name: &'static str) {
+            <$ident as $crate::RtosTrace>::name_marker(id, name)
+        }
+        #[no_mangle]
         fn _rtos_trace_marker(id: u32) {
             <$ident as $crate::RtosTrace>::marker(id)
         }

@@ -184,6 +184,12 @@ impl RtosTrace for SystemView {
         }
     }
 
+    fn name_marker(id: u32, name: &'static str) {
+        unsafe {
+            SEGGER_SYSVIEW_NameMarker(id, name.as_ptr());
+        }
+    }
+
     fn marker(id: u32) {
         unsafe {
             SEGGER_SYSVIEW_Mark(id);

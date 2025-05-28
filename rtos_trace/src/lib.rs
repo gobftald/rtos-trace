@@ -121,6 +121,8 @@ pub trait RtosTrace {
     fn isr_exit_to_scheduler();
 
     /// Create a new marker with `id`.
+    fn name_marker(id: u32, name: &'static str);
+    /// Create a new marker with `id`.
     fn marker(id: u32);
     /// Begin event of marker with `id`.
     fn marker_begin(id: u32);
