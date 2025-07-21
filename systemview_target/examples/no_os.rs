@@ -4,13 +4,13 @@
 use cortex_m_rt::entry;
 use panic_halt as _;
 
-use st_nucleo_f446::StNucleoF446;
 use rtos_trace::RtosTrace;
-use systemview_target::{SystemView};
+use st_nucleo_f446::StNucleoF446;
+use systemview_target::SystemView;
 
 use st_nucleo_f446::hal::prelude::*;
 
-use log::{info, warn, error, LevelFilter};
+use log::{error, info, warn, LevelFilter};
 
 static SYSTEMVIEW: SystemView = SystemView::new();
 
@@ -39,8 +39,7 @@ fn main() -> ! {
     }
 }
 
-
-rtos_trace::global_application_callbacks!{Application}
+rtos_trace::global_application_callbacks! {Application}
 struct Application;
 
 impl rtos_trace::RtosTraceApplicationCallbacks for Application {

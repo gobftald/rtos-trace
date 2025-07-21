@@ -1,26 +1,26 @@
 //! Set of traits used to trace RTOS internals.
-//! 
+//!
 //! # Features
-//! 
-//! - `trace_impl`: Activates tracing function (on by default). Can be used by 
+//!
+//! - `trace_impl`: Activates tracing function (on by default). Can be used by
 //!    the RTOS to deactivate tracing.
-//! 
+//!
 //! # Implementation
-//! 
+//!
 //! The backend is required implement [`RtosTrace`](crate::RtosTrace).
-//! 
+//!
 //! Existing implementation:
 //! - [SEGGER SystemView](https://docs.rs/systemview-target/)
-//! 
+//!
 //! # Usage
-//! 
+//!
 //! ## RTOS
-//! 
-//! The RTOS can implement [`RtosTraceOSCallbacks`](crate::RtosTraceOSCallbacks) to provide additional 
+//!
+//! The RTOS can implement [`RtosTraceOSCallbacks`](crate::RtosTraceOSCallbacks) to provide additional
 //! information upon request from the tracing software. For example:
 //! ```ignore
 //! rtos_trace::global_os_callbacks!{Scheduler}
-//! 
+//!
 //! impl rtos_trace::RtosTraceOSCallbacks for Scheduler {
 //!     fn task_list() {
 //!         /*..*/
@@ -31,31 +31,31 @@
 //!     /*..*/
 //! }
 //! ```
-//! 
+//!
 //! Usage for the RTOS maintainer is simple:
 //! ```ignore
 //! use rtos_trace::{RtosTrace, trace}
-//! 
+//!
 //! pub fn spawn_task(/*..*/) {
 //!     /*..*/
 //!     trace::task_new(task_id);
 //! }
 //! ```
-//! 
+//!
 //! ## Application
-//! 
+//!
 //! Similar to a global logger the user must provide a tracing backend, i.e.:
-//! ```ìgnore
+//! ```ignore
 //! use systemview_target::SystemView;
 //! rtos_trace::global_trace!{SystemView}
 //! ```
-//! 
-//! The user can implement [`RtosTraceApplicationCallbacks`] to provide 
+//!
+//! The user can implement [`RtosTraceApplicationCallbacks`] to provide
 //! additional information upon request from the tracing software. For example:
 //! ```ignore
 //! struct Application;
 //! rtos_trace::global_application_callbacks!{Application}
-//! 
+//!
 //! impl rtos_trace::RtosTraceApplicationCallbacks for Application {
 //!     fn system_description() {
 //!         systemview_target::send_system_desc_app_name!("Espresso Machine");
@@ -66,7 +66,7 @@
 //!     }
 //!     /*..*/
 //! }
-//! 
+//!
 //! ```
 
 #![no_std]
@@ -75,7 +75,7 @@ mod macros;
 pub mod trace;
 
 /// Task info block.
-pub struct  TaskInfo {
+pub struct TaskInfo {
     /// Names as static string.
     pub name: &'static str,
     /// Task priority number.
