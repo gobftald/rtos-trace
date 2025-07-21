@@ -88,10 +88,17 @@ pub struct TaskInfo {
 
 /// Collection of tracing functions which are called by the RTOS.
 pub trait RtosTrace {
+    /// Start tracing.
+    fn start();
+    /// Stop tracing.
+    fn stop();
+
     /// A new task with `id` was created.
     fn task_new(id: u32);
     /// The task with `id` has `info` attributes.
     fn task_send_info(id: u32, info: TaskInfo);
+    /// Convenience function to create a new task with a name only.
+    fn task_new_stackless(id: u32, name: &'static str, priority: u32);
     /// The task with `id` has been terminated.
     fn task_terminate(id: u32);
     /// The task with `id` will start to run on the CPU now.
@@ -113,6 +120,8 @@ pub trait RtosTrace {
     /// Exit an ISR to the scheduler.
     fn isr_exit_to_scheduler();
 
+    /// Create a new marker with `id`.
+    fn name_marker(id: u32, name: &'static str);
     /// Create a new marker with `id`.
     fn marker(id: u32);
     /// Begin event of marker with `id`.

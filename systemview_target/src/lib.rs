@@ -80,6 +80,18 @@ impl SystemView {
 }
 
 impl RtosTrace for SystemView {
+    fn start() {
+        unsafe {
+            SEGGER_SYSVIEW_Start();
+        }
+    }
+
+    fn stop() {
+        unsafe {
+            SEGGER_SYSVIEW_Stop();
+        }
+    }
+
     fn task_new(id: u32) {
         unsafe {
             SEGGER_SYSVIEW_OnTaskCreate(id);
@@ -103,6 +115,19 @@ impl RtosTrace for SystemView {
         unsafe {
             SEGGER_SYSVIEW_SendTaskInfo(&info);
         }
+    }
+
+    fn task_new_stackless(id: u32, name: &'static str, priority: u32) {
+        Self::task_new(id);
+        Self::task_send_info(
+            id,
+            TaskInfo {
+                name,
+                priority,
+                stack_base: 0,
+                stack_size: 0,
+            },
+        );
     }
 
     fn task_terminate(id: u32) {
@@ -156,6 +181,12 @@ impl RtosTrace for SystemView {
     fn isr_exit_to_scheduler() {
         unsafe {
             SEGGER_SYSVIEW_RecordExitISRToScheduler();
+        }
+    }
+
+    fn name_marker(id: u32, name: &'static str) {
+        unsafe {
+            SEGGER_SYSVIEW_NameMarker(id, name.as_ptr());
         }
     }
 

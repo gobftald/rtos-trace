@@ -4,7 +4,11 @@ use crate::TaskInfo;
 
 #[cfg(feature = "trace_impl")]
 extern "Rust" {
+    fn _rtos_trace_start();
+    fn _rtos_trace_stop();
+
     fn _rtos_trace_task_new(id: u32);
+    fn _rtos_trace_task_new_stackless(id: u32, name: &'static str, priority: u32);
     fn _rtos_trace_task_terminate(id: u32);
     fn _rtos_trace_task_exec_begin(id: u32);
     fn _rtos_trace_task_exec_end();
@@ -17,6 +21,7 @@ extern "Rust" {
     fn _rtos_trace_isr_exit();
     fn _rtos_trace_isr_exit_to_scheduler();
 
+    fn _rtos_trace_name_marker(id: u32, name: &'static str);
     fn _rtos_trace_marker(id: u32);
     fn _rtos_trace_marker_begin(id: u32);
     fn _rtos_trace_marker_end(id: u32);
@@ -29,10 +34,31 @@ extern "Rust" {
 }
 
 #[inline]
+pub fn start() {
+    #[cfg(feature = "trace_impl")]
+    unsafe {
+        _rtos_trace_start()
+    }
+}
+#[inline]
+pub fn stop() {
+    #[cfg(feature = "trace_impl")]
+    unsafe {
+        _rtos_trace_stop()
+    }
+}
+#[inline]
 pub fn task_new(id: u32) {
     #[cfg(feature = "trace_impl")]
     unsafe {
         _rtos_trace_task_new(id)
+    }
+}
+#[inline]
+pub fn task_new_stackless(id: u32, name: &'static str, priority: u32) {
+    #[cfg(feature = "trace_impl")]
+    unsafe {
+        _rtos_trace_task_new_stackless(id, name, priority)
     }
 }
 #[inline]
@@ -101,6 +127,13 @@ pub fn isr_exit_to_scheduler() {
     }
 }
 
+#[inline]
+pub fn name_marker(id: u32, name: &'static str) {
+    #[cfg(feature = "trace_impl")]
+    unsafe {
+        _rtos_trace_name_marker(id, name)
+    }
+}
 #[inline]
 pub fn marker(id: u32) {
     #[cfg(feature = "trace_impl")]

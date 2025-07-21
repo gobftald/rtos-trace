@@ -2,8 +2,20 @@
 macro_rules! global_trace {
     ($ident:ident) => {
         #[no_mangle]
+        fn _rtos_trace_start() {
+            <$ident as $crate::RtosTrace>::start()
+        }
+        #[no_mangle]
+        fn _rtos_trace_stop() {
+            <$ident as $crate::RtosTrace>::stop()
+        }
+        #[no_mangle]
         fn _rtos_trace_task_new(id: u32) {
             <$ident as $crate::RtosTrace>::task_new(id)
+        }
+        #[no_mangle]
+        fn _rtos_trace_task_new_stackless(id: u32, name: &'static str, priority: u32) {
+            <$ident as $crate::RtosTrace>::task_new_stackless(id, name, priority)
         }
         #[no_mangle]
         fn _rtos_trace_task_send_info(id: u32, info: $crate::TaskInfo) {
@@ -48,6 +60,10 @@ macro_rules! global_trace {
             <$ident as $crate::RtosTrace>::isr_exit_to_scheduler()
         }
 
+        #[no_mangle]
+        fn _rtos_trace_name_marker(id: u32, name: &'static str) {
+            <$ident as $crate::RtosTrace>::name_marker(id, name)
+        }
         #[no_mangle]
         fn _rtos_trace_marker(id: u32) {
             <$ident as $crate::RtosTrace>::marker(id)
