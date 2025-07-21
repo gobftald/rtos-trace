@@ -7,7 +7,7 @@ extern long long unsigned int _rtos_trace_time(void);
 extern unsigned int _rtos_trace_sysclock(void);
 
 // The lowest RAM address used for IDs (pointers)
-#define SYSVIEW_RAM_BASE        (0x00000000)
+#define SYSVIEW_RAM_BASE        (0x20000000)
 
 // Define as 1 if the Cortex-M cycle counter is used as SystemView timestamp. Must match SEGGER_SYSVIEW_Conf.h
 #ifndef   USE_CYCCNT_TIMESTAMP
