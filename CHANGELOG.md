@@ -1,0 +1,36 @@
+# Changelog
+
+## [0.2.0] - 2025-07-23
+
+### crate rtos_trace
+
+Features:
+- support for oneshot and post-mortem tracing *)
+- support for named markers *)
+- convenience function for stackless async tasks
+
+*) breaking change - requires simultaneous upgrade of the
+   systemview_target to v0.2.0
+
+### crate systemview_target
+
+Features:
+- cortex-m as default feature (non-breaking change as this is the only
+  available target anyway)
+- implement support for oneshot and post-mortem tracing
+- implement support for named markers
+
+Fixes:
+- rebuild after change to sysview config
+
+Chore:
+- upgraded dependencies
+- upgraded systemview source code to 3.60a
+
+Performance:
+- removed OS callback stub
+
+### build and development
+
+Chore:
+- VSCode default settings
