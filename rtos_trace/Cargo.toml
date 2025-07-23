@@ -1,6 +1,6 @@
 [package]
 name = "rtos-trace"
-version = "0.1.3"
+version = "0.2.0"
 authors = ["Stefan Lüthi <stefan@luethi.tech>"]
 edition = "2021"
 license = "MIT"
