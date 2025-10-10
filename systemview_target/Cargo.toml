@@ -1,6 +1,6 @@
 [package]
 name = "systemview-target"
-version = "0.2.0"
+version = "0.2.1"
 authors = ["Stefan Lüthi <stefan@luethi.tech>"]
 edition = "2021"
 license = "MIT"
@@ -20,9 +20,21 @@ callbacks-app = []
 log = ["heapless", "dep:log"]
 cortex-m = ["dep:cortex-m"]
 
+# Let systemview use externally allocated RTT channels. The number defines the
+# number of overall available RTT channels of which one must be pre-allocated
+# without a buffer. See README.md for more details and safety considerations.
+#
+# Note: Upstream SystemView source code requires at least two channels to be
+#       allocated (channel 0 being reserved for logging).
+ext-rtt-channels-2 = ["_ext-rtt-channels"]
+ext-rtt-channels-3 = ["_ext-rtt-channels"]
+ext-rtt-channels-4 = ["_ext-rtt-channels"]
+ext-rtt-channels-5 = ["_ext-rtt-channels"]
+_ext-rtt-channels = []
+
 [dependencies]
 cty = "0.2"
-rtos-trace = { version = "0.2.0", path = "../rtos_trace" }
+rtos-trace = { version = "0.2", path = "../rtos_trace" }
 heapless = { version = "0.8", optional = true }
 log = { version = "0.4", optional = true, features = [
     "max_level_debug",
