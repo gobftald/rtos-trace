@@ -254,6 +254,9 @@ static const unsigned char _aTerminalId[16] = { '0', '1', '2', '3', '4', '5', '6
 //
 // RTT Control Block and allocate buffers for channel 0
 //
+#ifdef SYSTEMVIEW_TARGET_EXT_RTT_CHANNELS
+extern SEGGER_RTT_CB _SEGGER_RTT;
+#else
 #if SEGGER_RTT_CPU_CACHE_LINE_SIZE
   #if ((defined __GNUC__) || (defined __clang__))
     SEGGER_RTT_CB _SEGGER_RTT                                                             __attribute__ ((aligned (SEGGER_RTT_CPU_CACHE_LINE_SIZE)));
@@ -273,6 +276,7 @@ static const unsigned char _aTerminalId[16] = { '0', '1', '2', '3', '4', '5', '6
   SEGGER_RTT_PUT_CB_SECTION(SEGGER_RTT_CB_ALIGN(SEGGER_RTT_CB _SEGGER_RTT));
   SEGGER_RTT_PUT_BUFFER_SECTION(SEGGER_RTT_BUFFER_ALIGN(static char _acUpBuffer  [BUFFER_SIZE_UP]));
   SEGGER_RTT_PUT_BUFFER_SECTION(SEGGER_RTT_BUFFER_ALIGN(static char _acDownBuffer[BUFFER_SIZE_DOWN]));
+#endif
 #endif
 
 static unsigned char _ActiveTerminal;
@@ -295,6 +299,9 @@ static unsigned char _ActiveTerminal;
 *    (1) May only be called via INIT() to avoid overriding settings.
 *        The only exception is SEGGER_RTT_Init(), to make an intentional override possible.
 */
+#ifdef SYSTEMVIEW_TARGET_EXT_RTT_CHANNELS
+  #define INIT()
+#else
   #define INIT()                                                                             \
     do {                                                                                     \
       volatile SEGGER_RTT_CB* pRTTCBInit;                                                    \
@@ -303,7 +310,9 @@ static unsigned char _ActiveTerminal;
         _DoInit();                                                                           \
       }                                                                                      \
     } while (0)
+#endif
 
+#ifndef SYSTEMVIEW_TARGET_EXT_RTT_CHANNELS
 static void _DoInit(void) {
   volatile SEGGER_RTT_CB* p;   // Volatile to make sure that compiler cannot change the order of accesses to the control block
   static const char _aInitStr[] = "\0\0\0\0\0\0TTR REGGES";  // Init complete ID string to make sure that things also work if RTT is linked to a no-init memory area
@@ -344,6 +353,7 @@ static void _DoInit(void) {
   }
   RTT__DMB();                       // Force order of memory accesses for cores that may perform out-of-order memory accesses
 }
+#endif
 
 /*********************************************************************
 *
@@ -1891,7 +1901,9 @@ int SEGGER_RTT_SetFlagsDownBuffer(unsigned BufferIndex, unsigned Flags) {
 *
 */
 void SEGGER_RTT_Init (void) {
+#ifndef SYSTEMVIEW_TARGET_EXT_RTT_CHANNELS
   _DoInit();
+#endif
 }
 
 /*********************************************************************

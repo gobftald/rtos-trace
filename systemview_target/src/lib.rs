@@ -208,3 +208,9 @@ impl RtosTrace for SystemView {
         }
     }
 }
+
+impl Default for SystemView {
+    fn default() -> Self {
+        Self::new()
+    }
+}

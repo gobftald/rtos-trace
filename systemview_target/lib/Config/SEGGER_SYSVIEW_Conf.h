@@ -92,7 +92,7 @@ Additional information:
 
 #define SEGGER_SYSVIEW_RTT_BUFFER_SIZE  2048
 
-#ifdef CALLBACKS_OS_TIME
+#ifdef SYSTEMVIEW_TARGET_CALLBACKS_OS_TIME
 extern unsigned int systemview_get_timestamp();
 #define SEGGER_SYSVIEW_GET_TIMESTAMP() (systemview_get_timestamp())
 #endif

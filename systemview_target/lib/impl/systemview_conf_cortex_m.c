@@ -33,7 +33,7 @@ static void send_system_description(void) {
 }
 
 
-#ifdef CALLBACKS_OS
+#ifdef SYSTEMVIEW_TARGET_CALLBACKS_OS
 static SEGGER_SYSVIEW_OS_API os_callbacks = {
         .pfGetTime = _rtos_trace_time,
         .pfSendTaskList = _rtos_trace_task_list,
@@ -63,7 +63,7 @@ void SEGGER_SYSVIEW_Conf(void) {
   SEGGER_SYSVIEW_Init(
           _rtos_trace_sysclock(),
           _rtos_trace_sysclock(),
-#ifdef CALLBACKS_OS
+#ifdef SYSTEMVIEW_TARGET_CALLBACKS_OS
           &os_callbacks,
 #else
           0,
