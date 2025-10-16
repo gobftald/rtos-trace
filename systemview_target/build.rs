@@ -23,12 +23,12 @@ fn main() {
     #[cfg(not(feature = "callbacks-os-time"))]
     let os_time = "_DUMMY";
     #[cfg(feature = "callbacks-os-time")]
-    let os_time = "CALLBACKS_OS_TIME";
+    let os_time = "SYSTEMVIEW_TARGET_CALLBACKS_OS_TIME";
 
     #[cfg(not(feature = "callbacks-os"))]
     let os_callbacks = "_DUMMY";
     #[cfg(feature = "callbacks-os")]
-    let os_callbacks = "CALLBACKS_OS";
+    let os_callbacks = "SYSTEMVIEW_TARGET_CALLBACKS_OS";
 
     // Compile SystemView
     cc::Build::new()
