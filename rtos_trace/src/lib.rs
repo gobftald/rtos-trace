@@ -3,7 +3,7 @@
 //! # Features
 //!
 //! - `trace_impl`: Activates tracing function (on by default). Can be used by
-//!    the RTOS to deactivate tracing.
+//!   the RTOS to deactivate tracing.
 //!
 //! # Implementation
 //!
