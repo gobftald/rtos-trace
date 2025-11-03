@@ -9,6 +9,14 @@ Fixes:
 - Breaking Change: The log dependency no longer fixes the max logging level
   which conflicted with features set by library users. To upgrade please set the
   corresponding features in your application's Cargo.toml.
+- Changes introduced in v0.2.1 were only documented in the README, not in
+  lib.rs. Crate documentation is now included from the README to prevent drift.
+
+### crate rtos-trace [0.2.1]
+
+Fixes:
+
+- Crate documentation is now included from the README to prevent drift.
 
 ## [0.2.1] - 2025-10-16
 
