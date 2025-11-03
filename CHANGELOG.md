@@ -1,6 +1,16 @@
 # Changelog
 
-## [0.2.1] - Unreleased
+## Unreleased
+
+### crate systemview_target [0.3.0]
+
+Fixes:
+
+- Breaking Change: The log dependency no longer fixes the max logging level
+  which conflicted with features set by library users. To upgrade please set the
+  corresponding features in your application's Cargo.toml.
+
+## [0.2.1] - 2025-10-16
 
 ### crate systemview_target
 

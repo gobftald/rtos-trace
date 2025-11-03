@@ -1,6 +1,6 @@
 [package]
 name = "systemview-target"
-version = "0.2.1"
+version = "0.3.0"
 authors = ["Stefan Lüthi <stefan@luethi.tech>"]
 edition = "2021"
 license = "MIT"
@@ -36,10 +36,7 @@ _ext-rtt-channels = []
 cty = "0.2"
 rtos-trace = { version = "0.2", path = "../rtos_trace" }
 heapless = { version = "0.8", optional = true }
-log = { version = "0.4", optional = true, features = [
-    "max_level_debug",
-    "release_max_level_warn",
-] }
+log = { version = "0.4", optional = true }
 cortex-m = { version = "0.7", optional = true }
 
 [build-dependencies]
