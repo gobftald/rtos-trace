@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 2025-11-19
 
 ### crate systemview_target [0.3.0]
 
