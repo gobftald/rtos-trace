@@ -26,7 +26,7 @@ add the following dependencies:
 # Cargo.toml
 [dependencies]
 rtos-trace = "0.2"
-systemview-target = { version = "0.2", features = ["log", "callbacks-app", "callbacks-os", "callbacks-os-time", "cortex-m"] }
+systemview-target = { version = "0.3", features = ["log", "callbacks-app", "callbacks-os", "callbacks-os-time", "cortex-m"] }
 log = "0.4"
 ```
 
@@ -92,7 +92,7 @@ defined in your application. In this example we'll define two RTT channels:
 defmt = "1.0"
 rtos-trace = "0.2"
 rtt-target = "0.6.2"
-systemview-target = { version = "0.2.1", features = ["ext-rtt-channels-2", ...] }
+systemview-target = { version = "0.3", features = ["ext-rtt-channels-2", ...] }
 ```
 
 Then we declare the RTT control block and `defmt` channel explicitly:
