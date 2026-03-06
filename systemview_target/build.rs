@@ -27,8 +27,8 @@ fn main() {
         .file("lib/impl/systemview_conf_cortex_m.c")
         .include("lib/SEGGER")
         .include("lib/Config")
-        .file("lib/SEGGER/SEGGER_RTT.c")
-        .file("lib/SEGGER/SEGGER_RTT_ASM_ARMv7M.S");
+        .file("lib/SEGGER/SEGGER_RTT.c");
+        //.file("lib/SEGGER/SEGGER_RTT_ASM_ARMv7M.S");
 
     #[cfg(feature = "callbacks-os-time")]
     build.define("SYSTEMVIEW_TARGET_CALLBACKS_OS_TIME", "");

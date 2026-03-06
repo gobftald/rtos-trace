@@ -1,8 +1,8 @@
 #![doc = include_str!("../README.md")]
 #![no_std]
 
-#[cfg(not(any(feature = "cortex-m")))]
-compile_error!("You must select a target architecture. Supported are: cortex-m");
+//#[cfg(not(any(feature = "cortex-m")))]
+//compile_error!("You must select a target architecture. Supported are: cortex-m");
 
 #[cfg(feature = "log")]
 pub mod log;
