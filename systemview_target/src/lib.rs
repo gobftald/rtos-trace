@@ -15,7 +15,7 @@ use core::ptr::null;
 pub use heapless;
 pub use rtos_trace::RtosTrace;
 use rtos_trace::TaskInfo;
-use wrapper::*;
+pub use wrapper::*;
 
 pub struct SystemView;
 

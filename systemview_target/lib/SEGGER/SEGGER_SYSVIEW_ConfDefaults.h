@@ -385,7 +385,7 @@ extern "C" {
 *    0: Disabled.
 */
 #ifndef   SEGGER_SYSVIEW_PRINTF_IMPLICIT_FORMAT
-  #define SEGGER_SYSVIEW_PRINTF_IMPLICIT_FORMAT   0
+  #define SEGGER_SYSVIEW_PRINTF_IMPLICIT_FORMAT   1
 #endif
 
 /*********************************************************************
